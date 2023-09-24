@@ -29,6 +29,8 @@ if (Object.values(params).every(x => x === null)) {
 
     const updateDate = () => {
       date.value.day = endDate.diff(dayjs(), 'd')
+      date.value.week = endDate.diff(dayjs(), 'w')
+      date.value.month = endDate.diff(dayjs(), 'M')
       date.value.hour = endDate.diff(dayjs(), 'h')
       date.value.second = endDate.diff(dayjs(), 's')
       if (date.value.second <= 0) {
@@ -61,6 +63,8 @@ if (Object.values(params).every(x => x === null)) {
 
     <div v-if="!error && !isFinish">
       <div class="text-6xl font-bold">{{ date.day }} Jours</div>
+      <div class="text-6xl font-bold">{{ date.week }} Semaines</div>
+      <div class="text-6xl font-bold">{{ date.month }} Mois</div>
       <div class="text-6xl font-bold">{{ date.hour }} Heures</div>
       <div class="text-6xl font-bold">{{ date.second }} Secondes</div>
     </div>
