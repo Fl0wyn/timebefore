@@ -14,7 +14,7 @@ const params = {
 }
 
 const isNotEmpty = ref(true)
-const date = ref({})
+const date = ref([])
 const msg = params.msg
 const error = ref(null)
 const isFinish = ref(false)
@@ -28,12 +28,15 @@ if (Object.values(params).every(x => x === null)) {
   if (endDate.isValid()) {
 
     const updateDate = () => {
-      date.value.day = endDate.diff(dayjs(), 'd')
-      date.value.week = endDate.diff(dayjs(), 'w')
-      date.value.month = endDate.diff(dayjs(), 'M')
-      date.value.hour = endDate.diff(dayjs(), 'h')
-      date.value.second = endDate.diff(dayjs(), 's')
-      if (date.value.second <= 0) {
+      date.value = [
+        { k: endDate.diff(dayjs(), 'y'), v: 'ans' },
+        { k: endDate.diff(dayjs(), 'M'), v: 'mois' },
+        { k: endDate.diff(dayjs(), 'w'), v: 'semaines' },
+        { k: endDate.diff(dayjs(), 'd'), v: 'jours' },
+        { k: endDate.diff(dayjs(), 'h'), v: 'heures' },
+        { k: endDate.diff(dayjs(), 's'), v: 'secondes' }
+      ]
+      if (date.value[5].k <= 0) {
         isFinish.value = true
         clearInterval(intervalID);
       }
@@ -44,6 +47,13 @@ if (Object.values(params).every(x => x === null)) {
   } else {
     error.value = 'Date invalide'
   }
+}
+
+const formatDate = (d) => {
+  const dv = (d.k <= 1 && d.v !== 'mois')
+    ? d.v.slice(0, -1)
+    : d.v
+  return `${d.k} ${dv}`
 }
 </script>
 
@@ -62,11 +72,9 @@ if (Object.values(params).every(x => x === null)) {
     <finish-page v-if="isFinish" />
 
     <div v-if="!error && !isFinish">
-      <div class="text-6xl font-bold">{{ date.day }} Jours</div>
-      <div class="text-6xl font-bold">{{ date.week }} Semaines</div>
-      <div class="text-6xl font-bold">{{ date.month }} Mois</div>
-      <div class="text-6xl font-bold">{{ date.hour }} Heures</div>
-      <div class="text-6xl font-bold">{{ date.second }} Secondes</div>
+      <div class="text-6xl font-bold " v-for="d in date" :key="d.v">
+        {{ formatDate(d) }}
+      </div>
     </div>
   </div>
 
