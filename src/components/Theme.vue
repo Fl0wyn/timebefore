@@ -1,16 +1,21 @@
 <script setup>
 import { ref } from 'vue'
 
+import backgroundDark from '../assets/background-dark.svg'
+import backgroundLight from '../assets/background-light.svg'
+import moon from '../assets/moon.svg'
+import sun from '../assets/sun.svg'
+
 const dark = () => {
   document.body.setAttribute('data-bs-theme', 'dark')
-  document.body.style.backgroundImage = 'url("img/background-dark.svg")'
-  return "img/moon.svg"
+  document.body.style.backgroundImage = `url("${backgroundDark}")`
+  return moon
 }
 
 const light = () => {
   document.body.setAttribute('data-bs-theme', 'light')
-  document.body.style.backgroundImage = 'url("img/background-light.svg")'
-  return "img/sun.svg"
+  document.body.style.backgroundImage = `url("${backgroundLight}")`
+  return sun
 }
 
 const changeTheme = () => {
@@ -37,15 +42,3 @@ updateThemeToHour()
 <template>
   <img :src="imgTheme" id="img-theme" class="absolute top-0 right-0 cursor-pointer" @click="changeTheme">
 </template>
-
-<style scoped>
-#img-theme {
-  width: 5rem;
-}
-
-@media (min-width: 640px) {
-  #img-theme {
-    width: 10rem;
-  }
-}
-</style>

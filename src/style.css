@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+#img-theme {
+  width: 5rem;
+}
+
+@media (min-width: 640px) {
+  #img-theme {
+    width: 10rem;
+  }
+}

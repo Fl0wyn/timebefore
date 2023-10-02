@@ -1,7 +1,7 @@
 <script setup>
 import { ref, watch } from 'vue'
-
-import vInput from '@/components/vInput.vue'
+import Input from '@/components/Input.vue'
+import { lang } from '@/locales/index'
 
 const inputText = ref('')
 const inputDate = ref('')
@@ -10,8 +10,11 @@ const inputTime = ref('')
 const isInputValid = ref(false)
 
 const goToCounterPage = () => {
-  const URL = `?msg=${inputText.value}&date=${inputDate.value}&hour=${inputTime.value}:00`
-  document.location.href = URL;
+  const msg = inputText.value
+  const date = inputDate.value
+  const hour = inputTime.value
+
+  document.location.href = `?msg=${msg}&date=${date}&hour=${hour}:00`;
 }
 
 watch([inputDate, inputTime], ([x, y]) => {
@@ -21,19 +24,19 @@ watch([inputDate, inputTime], ([x, y]) => {
 
 <template>
   <div class="text-white font-semibold text-5xl pb-8">
-    {{ isInputValid ? "Parfait ! C'est prêt 😉" : "Oh non, c'est vide 🥺" }}
+    {{ isInputValid ? lang.homeTitleReady : lang.homeTitleEmpty }}
   </div>
 
   <div class="flex flex-col gap-4 text-start text-2xl">
-    <v-input label="Message" type="text" v-model="inputText" />
+    <Input label="Message" type="text" v-model="inputText" />
     <div class="grid grid-flow-col gap-4">
-      <v-input label="Date" type="date" v-model="inputDate" />
-      <v-input label="Heure" type="time" v-model="inputTime" />
+      <Input label="Date" type="date" v-model="inputDate" />
+      <Input label="Heure" type="time" v-model="inputTime" />
     </div>
   </div>
 
   <button v-if="isInputValid" @click="goToCounterPage"
     class="w-full mt-6 text-2xl text-white hover:bg-white hover:text-slate-800 font-bold py-2 px-4 rounded">
-    Lancer le compteur
+    {{ lang.homeRunCounter }}
   </button>
 </template>
