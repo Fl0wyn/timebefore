@@ -37,7 +37,7 @@ const updateDate = () => {
 }
 
 const formatDate = (d) => {
-  const dv = (d.k <= 1 && d.v !== 'mois')
+  const dv = (d.k <= 1 && d.v !== 'mois' && d.v !== 'month')
     ? d.v.slice(0, -1)
     : d.v
   return `${d.k} ${dv}`

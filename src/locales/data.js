@@ -23,10 +23,10 @@ export const data = {
     en: "New",
     fr: "Nouveau"
   },
-  y: { en: 'year', fr: 'an' },
+  y: { en: 'years', fr: 'ans' },
   M: { en: 'month', fr: 'mois' },
-  w: { en: 'week', fr: 'semaine' },
-  d: { en: 'day', fr: 'jour' },
-  h: { en: 'hour', fr: 'heure' },
-  s: { en: 'second', fr: 'seconde' }
+  w: { en: 'weeks', fr: 'semaines' },
+  d: { en: 'days', fr: 'jours' },
+  h: { en: 'hours', fr: 'heures' },
+  s: { en: 'seconds', fr: 'secondes' }
 }
