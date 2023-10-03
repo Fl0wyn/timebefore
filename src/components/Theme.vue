@@ -35,7 +35,7 @@ const updateThemeToHour = () => {
   }
 }
 
-const imgTheme = ref(light())
+const imgTheme = ref(null)
 updateThemeToHour()
 </script>
 
